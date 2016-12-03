@@ -7,7 +7,7 @@ class Game:
     name = ""
     throwsLeft = 0
     bonesCount = 0
-    firstMove = 1
+    currentMove = 1
     
     curThrowScorecPC = 0
     curThrowScorePL = 0
@@ -22,14 +22,7 @@ class Game:
     maxThrows = 3
     maxBones = 3    
     
-    bonesSprites = ["###\n#0#\#n###" , "0##\n###\n##0" , "0##\n#0#\n##0" , "0#0\n###\n0#0" , "0#0\n#0#\n0#0" ,"0#0\0#0\0#0" ]
-    bone1 = "###\n#0#\#n###";
-    bone2 = "0##\n###\n##0"
-    bone3 = "0##\n#0#\n##0"
-    bone4 = "0#0\n###\n0#0"
-    bone5 = "0#0\n#0#\n0#0"
-    bone6 = "0#0\0#0\0#0"
-    
+    #...logic...
     def setname(self,PlayerName):
         self.name = PlayerName
         
@@ -40,7 +33,7 @@ class Game:
         self.bonesCount = Count
     
     def storeScores(self):
-        self.finalScoresTable + = [self.curThrowScoresPL , self.curThrowScoresPC]
+        self.finalScoresTable += [self.curThrowScoresPL , self.curThrowScoresPC]
     
     def setPLScores(self,scores):
         self.curThrowScoresPL = scores
@@ -53,20 +46,52 @@ class Game:
     
     def throwBones(self):
         self.Bones = []
-        for i in range(self.bonesCount - 1):
-            self.Bones. append (random.randint(1, 6))
+        for i in range(self.bonesCount):
+            self.Bones. append(random.randint(0, 5))
    
     def showeBones(self):
         for i in self.Bones:
-            print(i)
-            print
-            print(self.bonesSprites[self.Bones[i]])
             
-game = Game()
+             print(self.bonesSprites[i] + "\n")
+   
+    def  setBoneSpace(self):
+         space = random.randint (1,76)
+         spaces = ""
+         for i in range(space): space += " "
+    if boneSide == 1 : return spaces + "###\n" + spaces + "#0#\n" + spaces + "###"
+    elif boneSide == 2 :return  spaces + "0##\n" + spaces + "###\n" + spaces + "##0"
+    elif boneSide == 3 : return spaces + "0##\n" + spaces + "#0#\n" + spaces + "##0"
+    elif boneSide == 4 : return spaces + "0#0\n" + spaces + "###\n" + spaces + "0#0"
+    elif boneSide == 5 : return spaces + "0#0\n" + spaces + "#0#\n" + spaces + "0#0"
+    elif boneSide == 6 : return spaces + "000\n" + spaces + "###\n" + spaces + "000"
+    
+    def throw(self):
+        if self.currentMove == 1:
+            self.throwBones()
+            self.setPCScores(sum(self.Bones))
+        else: 
+            self.sayPlayerTurn()
+            self.throwBones ()
+            self.setPLScores(sum(self.Bones))
+        self.store.Score       
+                        
+    # ... interface ...
+    def sayPlayerTurn(self):
+        pass
+    def showThrowScores(self):
+        
+    def showOverallScores (self):
+        pass    
+    def showResultTable(self):
+        pass
+    def showActionMenu (self):
+        pass
+             
+#game = Game()
 
-game.setBonesCount(3)
-game.throwBones()
-game.showBones()            
+#game.setBonesCount(3)
+#game.throwBones()
+#game.showBones()            
                                
             
             
